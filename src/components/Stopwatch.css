@@ -1,0 +1,77 @@
+.TimeHolder {
+  margin: 90px 0;
+  position: relative;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TimeSvgHolder {
+  position: absolute;
+  transform: rotate(270deg);
+}
+
+.TimeSvgHolder circle:nth-child(1) {
+  stroke: #b7b7b7;
+  fill: none;
+  stroke-dasharray: 6;
+}
+
+.TimeSvgHolder circle:nth-child(2) {
+  stroke: #03a9f4;
+  fill: none;
+  stroke-width: 3px;
+  stroke-dasharray: 756;
+  stroke-dashoffset: 756;
+  stroke-linecap: round;
+}
+
+.TimeSvgHolder circle:nth-child(3) {
+  stroke: #f1f1f1;
+  fill: none;
+  stroke-width: 6px;
+  stroke-dasharray: 3;
+}
+
+.TimeHolder span {
+  position: relative;
+  top: -2px;
+  font-size: 32px;
+}
+
+.TimeItem {
+  display: inline-block;
+  font-size: 26px;
+  min-width: 36px;
+}
+
+.Button {
+  font-size: 20px;
+  margin: 20px;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.StartButton {
+  margin-top: 0;
+  margin-bottom: 80px;
+}
+
+.SavedResultsHolder {
+  margin-top: 60px;
+}
+
+.SavedResultsHolder ol {
+  min-width: 128px;
+  display: inline-block;
+  margin-left: -25px;
+}
+
+.SavedResultsHolder ol li {
+  border: 1px solid #e0e0e0;
+  padding: 9px 21px;
+  margin-bottom: 11px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
