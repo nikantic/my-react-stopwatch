@@ -4,7 +4,6 @@ import "./Stopwatch.css";
 class Stopwatch extends Component {
   state = {
     time: {
-      hours: 0,
       minutes: 0,
       seconds: 0,
       miliseconds: 0
@@ -44,7 +43,6 @@ class Stopwatch extends Component {
       // Minutes and Hours
       if (oldTimeState.minutes > 59) {
         oldTimeState.minutes = 0;
-        oldTimeState.hours += 1;
       }
       this.TimeSvgCircleDashOffset -= 0.207;
       this.TimeSvgCircleRef.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset;
@@ -83,7 +81,6 @@ class Stopwatch extends Component {
     this.setState(prevState => ({
       ...prevState,
       time: {
-        hours: 0,
         minutes: 0,
         seconds: 0,
         miliseconds: 0
@@ -93,8 +90,7 @@ class Stopwatch extends Component {
   };
 
   SaveResult = () => {
-    const savedResult = this.state.time;
-    this.ResetStopwatch();
+    const savedResult = this.FormatSavedResult(this.state.time);
     this.setState(prevState => ({
       ...prevState,
       savedResults: [...prevState.savedResults, savedResult]
@@ -127,10 +123,6 @@ class Stopwatch extends Component {
             </svg>
           </div>
           <div className="TimeItem">
-            {this.FormatTime(this.state.time.hours)}
-          </div>
-          <span>:</span>
-          <div className="TimeItem">
             {this.FormatTime(this.state.time.minutes)}
           </div>
           <span>:</span>
@@ -158,7 +150,7 @@ class Stopwatch extends Component {
             <h2>Saved Results</h2>
             <ol>
               {this.state.savedResults.map((item, i) => (
-                <li key={i}>{this.FormatSavedResult(item)}</li>
+                <li key={i}>{item}</li>
               ))}
             </ol>
           </div>
