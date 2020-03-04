@@ -34,6 +34,16 @@
   stroke-dasharray: 3;
 }
 
+.TimeSvgHolder circle:nth-child(4) {
+  stroke: #cc5e5e;
+  fill: none;
+  stroke-width: 3px;
+  stroke-dasharray: 629;
+  stroke-dashoffset: 629;
+  transform: rotateZ(0deg);
+  transform-origin: center;
+}
+
 .TimeHolder span {
   position: relative;
   top: -2px;

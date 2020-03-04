@@ -9,6 +9,7 @@ class Stopwatch extends Component {
       miliseconds: 0
     },
     isRunning: false,
+    isSaveRunning: false,
     savedResults: []
   };
 
@@ -16,12 +17,20 @@ class Stopwatch extends Component {
     super(props);
     this.timeInterval = null;
     this.TimeSvgCircleRef = React.createRef();
-    this.TimeSvgCircleDashOffset = 756; // stroke dashoffset lenght
+    this.TimeSvgCircleRef2 = React.createRef();
+    this.TimeSvgCircleDashOffset = 756; // stroke dashoffset length
+    this.TimeSvgCircleDashOffset2 = 629; // stroke dashoffset 2 length
+    this.TimeSvgCircle2Rotate = 0;
   }
 
   reinitCircleSVG = () => {
-    this.TimeSvgCircleDashOffset = 756; // stroke dashoffset lenght
+    this.TimeSvgCircleDashOffset = 756; // stroke dashoffset length
     this.TimeSvgCircleRef.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset;
+  };
+
+  reinitCircleSVG2 = () => {
+    this.TimeSvgCircleDashOffset2 = 629; // stroke dashoffset 2 length
+    this.TimeSvgCircleRef2.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset2;
   };
 
   UpdateTime = () => {
@@ -46,6 +55,22 @@ class Stopwatch extends Component {
       }
       this.TimeSvgCircleDashOffset -= 0.207;
       this.TimeSvgCircleRef.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset;
+      this.TimeSvgCircle2Rotate += 0.098;
+
+      if (this.TimeSvgCircleDashOffset2 < 0) {
+        this.reinitCircleSVG2();
+      }
+      if (this.TimeSvgCircle2Rotate > 358) {
+        this.TimeSvgCircle2Rotate = 0;
+      }
+      if (this.state.isSaveRunning) {
+        this.TimeSvgCircleDashOffset2 -= 0.172;
+        this.TimeSvgCircleRef2.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset2;
+      } else {
+        this.TimeSvgCircleRef2.current.style.transform =
+          "rotate(" + this.TimeSvgCircle2Rotate + "deg)";
+      }
+
       this.setState(prevState => ({
         ...prevState,
         time: oldTimeState
@@ -78,6 +103,9 @@ class Stopwatch extends Component {
   ResetStopwatch = () => {
     clearInterval(this.timeInterval);
     this.reinitCircleSVG();
+    this.reinitCircleSVG2();
+    this.TimeSvgCircle2Rotate = 0;
+    this.TimeSvgCircleRef2.current.style.transform = "rotate(" + 0 + "deg)";
     this.setState(prevState => ({
       ...prevState,
       time: {
@@ -85,15 +113,20 @@ class Stopwatch extends Component {
         seconds: 0,
         miliseconds: 0
       },
-      isRunning: false
+      isRunning: false,
+      isSaveRunning: false
     }));
   };
 
   SaveResult = () => {
+    this.TimeSvgCircleRef2.current.style.transform =
+      "rotate(" + this.TimeSvgCircle2Rotate + "deg)";
+    this.reinitCircleSVG2();
     const savedResult = this.FormatSavedResult(this.state.time);
     this.setState(prevState => ({
       ...prevState,
-      savedResults: [...prevState.savedResults, savedResult]
+      savedResults: [...prevState.savedResults, savedResult],
+      isSaveRunning: true
     }));
   };
 
@@ -120,6 +153,7 @@ class Stopwatch extends Component {
               <circle cx="150" cy="150" r="120" />
               <circle ref={this.TimeSvgCircleRef} cx="150" cy="150" r="120" />
               <circle cx="150" cy="150" r="110" />
+              <circle ref={this.TimeSvgCircleRef2} cx="150" cy="150" r="100" />
             </svg>
           </div>
           <div className="TimeItem">

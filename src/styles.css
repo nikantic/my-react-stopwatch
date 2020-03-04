@@ -1,4 +1,15 @@
+html {
+  background: #000;
+  color: #fff;
+  font-family: monospace;
+}
+
+button {
+  background: #151515;
+  border: 1px solid #292929;
+  color: #fff;
+}
+
 .App {
-  font-family: sans-serif;
   text-align: center;
 }
