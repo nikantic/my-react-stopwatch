@@ -82,6 +82,18 @@ class Stopwatch extends Component {
     return time < 10 ? "0" + time : time;
   };
 
+  FormatMilisecondsToDate = ms => {
+    return {
+      minutes: Math.floor(ms / 3600000),
+      seconds: Math.floor((ms % 3600000) / 60000),
+      miliseconds: Math.floor(((ms % 360000) % 60000) / 1000)
+    };
+  };
+
+  TimeToMiliseconds = time => {
+    return time.minutes * 3600 + time.seconds * 60 + time.miliseconds;
+  };
+
   StartStopwatch = () => {
     this.setState(
       prevState => ({
@@ -122,10 +134,11 @@ class Stopwatch extends Component {
     this.TimeSvgCircleRef2.current.style.transform =
       "rotate(" + this.TimeSvgCircle2Rotate + "deg)";
     this.reinitCircleSVG2();
-    const savedResult = this.FormatSavedResult(this.state.time);
+    const savedResultString = this.FormatSavedResult(this.state.time);
+    const saveResultMs = this.TimeToMiliseconds(this.state.time) * 1000;
     this.setState(prevState => ({
       ...prevState,
-      savedResults: [...prevState.savedResults, savedResult],
+      savedResults: [...prevState.savedResults, saveResultMs],
       isSaveRunning: true
     }));
   };
@@ -179,7 +192,7 @@ class Stopwatch extends Component {
             Reset
           </button>
         </div>
-        {this.state.savedResults.length ? (
+        {/* {this.state.savedResults.length ? (
           <div className="SavedResultsHolder">
             <h2>Saved Results</h2>
             <ol>
@@ -188,7 +201,7 @@ class Stopwatch extends Component {
               ))}
             </ol>
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     );
   }

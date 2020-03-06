@@ -12,6 +12,10 @@
   transform: rotate(270deg);
 }
 
+.TimeSvgHolder svg {
+  transform: scale(1.5);
+}
+
 .TimeSvgHolder circle:nth-child(1) {
   stroke: #b7b7b7;
   fill: none;
@@ -40,6 +44,7 @@
   stroke-width: 3px;
   stroke-dasharray: 629;
   stroke-dashoffset: 629;
+  stroke-linecap: round;
   transform: rotateZ(0deg);
   transform-origin: center;
 }
@@ -52,8 +57,8 @@
 
 .TimeItem {
   display: inline-block;
-  font-size: 26px;
-  min-width: 36px;
+  font-size: 48px;
+  min-width: 61px;
 }
 
 .Button {
@@ -79,7 +84,6 @@
 }
 
 .SavedResultsHolder ol li {
-  border: 1px solid #e0e0e0;
   padding: 9px 21px;
   margin-bottom: 11px;
   font-size: 14px;
