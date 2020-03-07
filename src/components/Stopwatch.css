@@ -1,3 +1,10 @@
+.MainHolder {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .TimeHolder {
   margin: 90px 0;
   position: relative;
@@ -90,20 +97,43 @@
   font-size: 22px;
 }
 
-.Button {
-  font-size: 20px;
-  margin: 20px;
-  padding: 7px 20px;
-  cursor: pointer;
+.ButtonsHolder {
+  position: absolute;
+  width: 555px;
+  bottom: 27%;
 }
 
-.StartButton {
-  margin-top: 0;
-  margin-bottom: 60px;
+.Button {
+  position: absolute;
+  left: 0;
+  font-size: 20px;
+  margin: 20px;
+  padding: 27px;
+  cursor: pointer;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  background-color: #ffc107;
+  color: #000;
+  animation: slide-from-bottom 1s forwards;
+}
+
+.Button:nth-child(2) {
+  left: auto;
+  position: absolute;
+  right: 0;
+}
+
+.Button svg path {
+  stroke: currentColor;
+  fill: currentColor;
 }
 
 .SavedResultsHolder {
-  margin-top: 90px;
+  animation: slide-from-bottom 0.3s forwards;
 }
 
 .SavedResultsHolder table {
@@ -132,10 +162,10 @@
 }
 
 .SavedResultsHolder td {
-  animation: animated-td-in 0.3s forwards;
+  animation: slide-from-bottom 0.3s forwards;
 }
 
-@keyframes animated-td-in {
+@keyframes slide-from-bottom {
   0% {
     opacity: 0;
     transform: translateY(10px);

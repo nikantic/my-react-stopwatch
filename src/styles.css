@@ -4,10 +4,8 @@ html {
   font-family: sans-serif;
 }
 
-button {
-  background: #151515;
-  border: 1px solid #292929;
-  color: #fff;
+body {
+  margin-bottom: 50px;
 }
 
 .App {
