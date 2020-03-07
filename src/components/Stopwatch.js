@@ -10,6 +10,7 @@ class Stopwatch extends Component {
     },
     isRunning: false,
     isSaveRunning: false,
+    isReset: true,
     savedResults: []
   };
 
@@ -98,7 +99,8 @@ class Stopwatch extends Component {
     this.setState(
       prevState => ({
         ...prevState,
-        isRunning: !prevState.isRunning
+        isRunning: !prevState.isRunning,
+        isReset: false
       }),
       () => {
         if (this.state.isRunning) {
@@ -114,6 +116,7 @@ class Stopwatch extends Component {
 
   ResetStopwatch = () => {
     clearInterval(this.timeInterval);
+    this.timeInterval = null;
     this.reinitCircleSVG();
     this.reinitCircleSVG2();
     this.TimeSvgCircle2Rotate = 0;
@@ -126,6 +129,7 @@ class Stopwatch extends Component {
         miliseconds: 0
       },
       isRunning: false,
+      isReset: true,
       isSaveRunning: false
     }));
   };
@@ -136,9 +140,27 @@ class Stopwatch extends Component {
     this.reinitCircleSVG2();
     const savedResultString = this.FormatSavedResult(this.state.time);
     const saveResultMs = this.TimeToMiliseconds(this.state.time) * 1000;
+    let timeDifference = saveResultMs;
+    if (this.state.savedResults.length) {
+      const prevItemMs = this.state.savedResults[
+        this.state.savedResults.length - 1
+      ].startTimeMs;
+      timeDifference = timeDifference - prevItemMs;
+    }
+    const timeDifferenceFormated = this.FormatSavedResult(
+      this.FormatMilisecondsToDate(timeDifference)
+    );
     this.setState(prevState => ({
       ...prevState,
-      savedResults: [...prevState.savedResults, saveResultMs],
+      savedResults: [
+        ...prevState.savedResults,
+        {
+          startTimeMs: saveResultMs,
+          startTimeFormated: savedResultString,
+          totalMs: timeDifference,
+          totalMsFormated: timeDifferenceFormated
+        }
+      ],
       isSaveRunning: true
     }));
   };
@@ -180,6 +202,18 @@ class Stopwatch extends Component {
           <div className="TimeItem">
             {this.FormatTime(this.state.time.miliseconds)}
           </div>
+          <div
+            className={
+              "SmallClock " +
+              (!this.state.isReset
+                ? this.state.isRunning
+                  ? "Running"
+                  : "Running Paused"
+                : "")
+            }
+          >
+            <div />
+          </div>
         </div>
         <button className="Button StartButton" onClick={this.StartStopwatch}>
           {!this.state.isRunning ? "Start" : "Pause"}
@@ -192,16 +226,19 @@ class Stopwatch extends Component {
             Reset
           </button>
         </div>
-        {/* {this.state.savedResults.length ? (
+        {this.state.savedResults.length ? (
           <div className="SavedResultsHolder">
             <h2>Saved Results</h2>
             <ol>
               {this.state.savedResults.map((item, i) => (
-                <li key={i}>{item}</li>
+                <li key={i}>
+                  <div>{item.startTimeFormated}</div>
+                  <div>{item.totalMsFormated}</div>
+                </li>
               ))}
             </ol>
           </div>
-        ) : null} */}
+        ) : null}
       </div>
     );
   }

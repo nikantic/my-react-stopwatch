@@ -89,3 +89,53 @@
   font-size: 14px;
   letter-spacing: 1px;
 }
+
+.SmallClock {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  margin-top: 81px;
+  background-color: #2f2f2f;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SmallClock.Running.Paused:before {
+  animation-play-state: paused;
+}
+
+.SmallClock.Running:before {
+  animation: rotate-small-circle 1s linear infinite;
+}
+
+.SmallClock:before {
+  content: "";
+  background-color: #fff;
+  width: 1px;
+  height: 35%;
+  position: absolute;
+  bottom: 50%;
+  transform: rotateZ(0);
+  transform-origin: bottom;
+  will-change: transform;
+}
+
+.SmallClock:after {
+  content: "";
+  background: #fff;
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+@keyframes rotate-small-circle {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
