@@ -10,7 +10,6 @@ class Stopwatch extends Component {
     },
     isRunning: false,
     isSaveRunning: false,
-    isReset: true,
     savedResults: []
   };
 
@@ -19,9 +18,11 @@ class Stopwatch extends Component {
     this.timeInterval = null;
     this.TimeSvgCircleRef = React.createRef();
     this.TimeSvgCircleRef2 = React.createRef();
+    this.TimeSmallCircle = React.createRef();
     this.TimeSvgCircleDashOffset = 756; // stroke dashoffset length
     this.TimeSvgCircleDashOffset2 = 629; // stroke dashoffset 2 length
     this.TimeSvgCircle2Rotate = 0;
+    this.TimeSmallCircleRotate = 0;
   }
 
   reinitCircleSVG = () => {
@@ -32,6 +33,12 @@ class Stopwatch extends Component {
   reinitCircleSVG2 = () => {
     this.TimeSvgCircleDashOffset2 = 629; // stroke dashoffset 2 length
     this.TimeSvgCircleRef2.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset2;
+  };
+
+  reinitSmallCircle = () => {
+    this.TimeSmallCircleRotate = 0;
+    this.TimeSmallCircle.current.style.transform =
+      "rotateZ(" + this.TimeSmallCircleRotate + "deg)";
   };
 
   UpdateTime = () => {
@@ -69,8 +76,16 @@ class Stopwatch extends Component {
         this.TimeSvgCircleRef2.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset2;
       } else {
         this.TimeSvgCircleRef2.current.style.transform =
-          "rotate(" + this.TimeSvgCircle2Rotate + "deg)";
+          "rotateZ(" + this.TimeSvgCircle2Rotate + "deg)";
       }
+
+      this.TimeSmallCircleRotate += 1;
+
+      if (this.TimeSmallCircleRotate > 358) {
+        this.TimeSmallCircleRotate = 0;
+      }
+      this.TimeSmallCircle.current.style.transform =
+        "rotateZ(" + this.TimeSmallCircleRotate + "deg)";
 
       this.setState(prevState => ({
         ...prevState,
@@ -99,8 +114,7 @@ class Stopwatch extends Component {
     this.setState(
       prevState => ({
         ...prevState,
-        isRunning: !prevState.isRunning,
-        isReset: false
+        isRunning: !prevState.isRunning
       }),
       () => {
         if (this.state.isRunning) {
@@ -119,8 +133,9 @@ class Stopwatch extends Component {
     this.timeInterval = null;
     this.reinitCircleSVG();
     this.reinitCircleSVG2();
+    this.reinitSmallCircle();
     this.TimeSvgCircle2Rotate = 0;
-    this.TimeSvgCircleRef2.current.style.transform = "rotate(" + 0 + "deg)";
+    this.TimeSvgCircleRef2.current.style.transform = "rotateZ(" + 0 + "deg)";
     this.setState(prevState => ({
       ...prevState,
       time: {
@@ -129,14 +144,13 @@ class Stopwatch extends Component {
         miliseconds: 0
       },
       isRunning: false,
-      isReset: true,
       isSaveRunning: false
     }));
   };
 
   SaveResult = () => {
     this.TimeSvgCircleRef2.current.style.transform =
-      "rotate(" + this.TimeSvgCircle2Rotate + "deg)";
+      "rotateZ(" + this.TimeSvgCircle2Rotate + "deg)";
     this.reinitCircleSVG2();
     const savedResultString = this.FormatSavedResult(this.state.time);
     const saveResultMs = this.TimeToMiliseconds(this.state.time) * 1000;
@@ -202,16 +216,8 @@ class Stopwatch extends Component {
           <div className="TimeItem">
             {this.FormatTime(this.state.time.miliseconds)}
           </div>
-          <div
-            className={
-              "SmallClock " +
-              (!this.state.isReset
-                ? this.state.isRunning
-                  ? "Running"
-                  : "Running Paused"
-                : "")
-            }
-          >
+          <div className="SmallClock">
+            <span ref={this.TimeSmallCircle} />
             <div />
           </div>
         </div>

@@ -9,7 +9,7 @@
 
 .TimeSvgHolder {
   position: absolute;
-  transform: rotate(270deg);
+  transform: rotateZ(270deg);
 }
 
 .TimeSvgHolder svg {
@@ -49,7 +49,7 @@
   transform-origin: center;
 }
 
-.TimeHolder span {
+.TimeHolder > span {
   position: relative;
   top: -2px;
   font-size: 32px;
@@ -102,16 +102,7 @@
   align-items: center;
 }
 
-.SmallClock.Running.Paused:before {
-  animation-play-state: paused;
-}
-
-.SmallClock.Running:before {
-  animation: rotate-small-circle 1s linear infinite;
-}
-
-.SmallClock:before {
-  content: "";
+.SmallClock > span {
   background-color: #fff;
   width: 1px;
   height: 35%;
@@ -129,13 +120,4 @@
   height: 5px;
   position: absolute;
   border-radius: 50%;
-}
-
-@keyframes rotate-small-circle {
-  0% {
-    transform: rotateZ(0);
-  }
-  100% {
-    transform: rotateZ(360deg);
-  }
 }
