@@ -5,17 +5,23 @@
   align-items: center;
 }
 
+.TitleArea {
+  margin-top: 50px;
+}
+
 .TitleArea h1 {
   margin-bottom: 2px;
+  letter-spacing: 1px;
 }
 
 .TitleArea p {
   font-family: monospace;
   font-size: 14px;
+  color: #dadada;
 }
 
 .TimeHolder {
-  margin: 90px 0;
+  margin: 70px 0 90px 0;
   position: relative;
   height: 300px;
   display: flex;
@@ -126,6 +132,10 @@
   animation: slide-from-bottom 0.3s forwards;
 }
 
+.SavedResultsHolder h2 {
+  letter-spacing: 1px;
+}
+
 .SavedResultsHolder table {
   display: inline-block;
 }
@@ -137,6 +147,7 @@
 
 .SavedResultsHolder th {
   background: #0e0e0e;
+  font-weight: normal;
 }
 
 .SavedResultsHolder td:nth-child(4) {
@@ -148,7 +159,7 @@
   padding: 15px 30px;
   margin-bottom: 11px;
   font-size: 14px;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .SavedResultsHolder td {

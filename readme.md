@@ -1,7 +1,8 @@
 todo:
 
 - rework table + sorting
-- responsive, documentation, day night theme with css variables
+- responsive, day night theme with css variables
+- documentation (readme)
 
 fixes:
 
