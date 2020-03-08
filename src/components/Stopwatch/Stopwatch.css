@@ -5,6 +5,15 @@
   align-items: center;
 }
 
+.TitleArea h1 {
+  margin-bottom: 2px;
+}
+
+.TitleArea p {
+  font-family: monospace;
+  font-size: 14px;
+}
+
 .TimeHolder {
   margin: 90px 0;
   position: relative;
@@ -24,13 +33,13 @@
 }
 
 .TimeSvgHolder circle:nth-child(1) {
-  stroke: #b7b7b7;
+  stroke: rgba(183, 183, 183, 0.23);
   fill: none;
   stroke-dasharray: 6;
 }
 
 .TimeSvgHolder circle:nth-child(2) {
-  stroke: #03a9f4;
+  stroke: #02febe;
   fill: none;
   stroke-width: 3px;
   stroke-dasharray: 756;
@@ -39,14 +48,14 @@
 }
 
 .TimeSvgHolder circle:nth-child(3) {
-  stroke: #f1f1f1;
+  stroke: rgba(241, 241, 241, 0.54);
   fill: none;
   stroke-width: 6px;
   stroke-dasharray: 3;
 }
 
 .TimeSvgHolder circle:nth-child(4) {
-  stroke: #cc5e5e;
+  stroke: #02fd7d;
   fill: none;
   stroke-width: 3px;
   stroke-dasharray: 629;
@@ -82,7 +91,7 @@
   bottom: -8px;
   width: 30%;
   height: 2px;
-  background-color: #cc5e5e;
+  background-color: #02fd7d;
 }
 
 .SaveTimeHolder > div {
@@ -103,33 +112,14 @@
   bottom: 27%;
 }
 
-.Button {
+.ButtonsHolder .Button {
   position: absolute;
   left: 0;
-  font-size: 20px;
-  margin: 20px;
-  padding: 27px;
-  cursor: pointer;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
-  background-color: #ffc107;
-  color: #000;
-  animation: slide-from-bottom 1s forwards;
 }
 
-.Button:nth-child(2) {
+.ButtonsHolder .Button:nth-child(2) {
   left: auto;
-  position: absolute;
   right: 0;
-}
-
-.Button svg path {
-  stroke: currentColor;
-  fill: currentColor;
 }
 
 .SavedResultsHolder {
@@ -146,7 +136,7 @@
 }
 
 .SavedResultsHolder th {
-  background: #151515;
+  background: #0e0e0e;
 }
 
 .SavedResultsHolder td:nth-child(4) {
@@ -155,7 +145,7 @@
 
 .SavedResultsHolder th,
 .SavedResultsHolder td {
-  padding: 12px 30px;
+  padding: 15px 30px;
   margin-bottom: 11px;
   font-size: 14px;
   letter-spacing: 1px;
@@ -181,7 +171,7 @@
   height: 40px;
   position: absolute;
   margin-top: 81px;
-  background-color: #2f2f2f;
+  background-color: rgba(47, 47, 47, 0.63);
   border-radius: 50%;
   display: flex;
   justify-content: center;

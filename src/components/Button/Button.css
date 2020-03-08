@@ -1,0 +1,42 @@
+.Button {
+  font-size: 20px;
+  margin: 20px;
+  padding: 27px;
+  cursor: pointer;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  background-color: #02ffbf;
+  color: #000;
+  box-sizing: border-box;
+  transition: 0.3s;
+  animation: slide-from-bottom 0.7s forwards;
+}
+
+.Button:hover {
+  background: #02feac;
+}
+
+.Button svg path {
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.Button.StartButton svg {
+  position: relative;
+  left: 2px;
+}
+
+.Button.SaveButton svg {
+  position: relative;
+  left: 2px;
+}
+
+.Button.ResetButton svg {
+  position: relative;
+  bottom: 2px;
+  left: 1px;
+}
