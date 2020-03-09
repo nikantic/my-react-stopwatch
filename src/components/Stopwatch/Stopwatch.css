@@ -14,10 +14,12 @@
   letter-spacing: 1px;
 }
 
-.TitleArea p {
-  font-family: monospace;
-  font-size: 14px;
+.TitleArea a {
+  display: inline-block;
+  font-size: 13px;
   color: #dadada;
+  letter-spacing: 1px;
+  text-decoration: none;
 }
 
 .TimeHolder {
@@ -207,4 +209,46 @@
   height: 5px;
   position: absolute;
   border-radius: 50%;
+}
+
+/* Media Queries */
+
+@media (max-width: 600px) {
+  .TitleArea h1 {
+    font-size: 27px;
+  }
+
+  .TitleArea {
+    margin-top: 30px;
+  }
+
+  .TimeHolder {
+    margin: 20px 0 90px 0;
+  }
+
+  .TimeSvgHolder svg {
+    transform: scale(1.2);
+  }
+
+  .TimeItem {
+    font-size: 42px;
+    min-width: 53px;
+  }
+
+  .SaveTimeHolder {
+    top: 78px;
+  }
+
+  .SaveTimeHolder > div {
+    font-size: 21px;
+    min-width: 30px;
+  }
+
+  .ButtonsHolder {
+    width: 90vw;
+  }
+
+  .SavedResultsHolder {
+    margin-top: 70px;
+  }
 }

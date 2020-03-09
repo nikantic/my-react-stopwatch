@@ -243,7 +243,16 @@ class Stopwatch extends Component {
       <div className="App">
         <div className="TitleArea">
           <h1>React Stopwatch</h1>
-          <p>by Nikola Antic</p>
+          <p>
+            <a
+              href="https://nikantic.github.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              by Nikola Antic{" "}
+              <Button buttonClasses="GithubButton" svgIcon="github" />
+            </a>
+          </p>
         </div>
         <div className="MainHolder">
           <div className="TimeHolder">
