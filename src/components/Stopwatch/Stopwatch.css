@@ -16,6 +16,7 @@
 
 .TitleArea a {
   display: inline-block;
+  margin: 15px 0;
   font-size: 13px;
   color: #dadada;
   letter-spacing: 1px;
@@ -120,12 +121,12 @@
   bottom: 27%;
 }
 
-.ButtonsHolder .Button {
+.ButtonsHolder .ButtonWrapper {
   position: absolute;
   left: 0;
 }
 
-.ButtonsHolder .Button:nth-child(2) {
+.ButtonsHolder .ButtonWrapper:nth-child(2) {
   left: auto;
   right: 0;
 }
@@ -140,6 +141,7 @@
 
 .SavedResultsHolder table {
   display: inline-block;
+  max-width: 100vw;
 }
 
 .SavedResultsHolder th,
@@ -148,12 +150,12 @@
 }
 
 .SavedResultsHolder th {
-  background: #0e0e0e;
+  background-color: #191919;
   font-weight: normal;
 }
 
 .SavedResultsHolder td:nth-child(4) {
-  background: #151515;
+  background: #191919;
 }
 
 .SavedResultsHolder th,
@@ -250,5 +252,15 @@
 
   .SavedResultsHolder {
     margin-top: 70px;
+  }
+
+  .SavedResultsHolder th {
+    padding: 17px 13px;
+    letter-spacing: 1px;
+  }
+
+  .SavedResultsHolder td {
+    padding: 13px 13px;
+    letter-spacing: 1px;
   }
 }

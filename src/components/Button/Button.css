@@ -14,12 +14,16 @@
   background-color: #02ffbf;
   color: #000;
   box-sizing: border-box;
-  transition: 0.3s;
   animation: slide-from-bottom 0.7s forwards;
 }
 
 .Button:hover {
   background: #02feac;
+}
+
+.ButtonWrapper {
+  display: inline-block;
+  transition: 0.2s;
 }
 
 .Button svg path {

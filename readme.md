@@ -1,8 +1,7 @@
 todo:
 
-- responsive for table, day night theme with css variables, test in firefox
-- button tap feedback, maybe use gradient for background
 - add table sorting
+- day night theme with css variables, test in firefox
 - update readme
 
 fixes:
