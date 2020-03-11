@@ -18,7 +18,7 @@
   display: inline-block;
   margin: 15px 0;
   font-size: 13px;
-  color: #dadada;
+  color: inherit;
   letter-spacing: 1px;
   text-decoration: none;
 }
@@ -57,7 +57,7 @@
 }
 
 .TimeSvgHolder circle:nth-child(3) {
-  stroke: rgba(241, 241, 241, 0.54);
+  stroke: var(--grey-color-2);
   fill: none;
   stroke-width: 6px;
   stroke-dasharray: 3;
@@ -150,12 +150,12 @@
 }
 
 .SavedResultsHolder th {
-  background-color: #191919;
+  background-color: var(--grey-color);
   font-weight: normal;
 }
 
 .SavedResultsHolder td:nth-child(4) {
-  background: #191919;
+  background-color: var(--grey-color);
 }
 
 .SavedResultsHolder th,
@@ -186,7 +186,7 @@
   height: 40px;
   position: absolute;
   margin-top: 81px;
-  background-color: rgba(47, 47, 47, 0.63);
+  background-color: var(--grey-color);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -194,7 +194,7 @@
 }
 
 .SmallClock > span {
-  background-color: #fff;
+  background-color: var(--text-color);
   width: 1px;
   height: 35%;
   position: absolute;
@@ -206,7 +206,7 @@
 
 .SmallClock:after {
   content: "";
-  background: #fff;
+  background: var(--text-color);
   width: 5px;
   height: 5px;
   position: absolute;

@@ -1,14 +1,26 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
+:root {
+  --bg-color: #000;
+  --text-color: #fff;
+  --grey-color: #171717;
+  --grey-color-2: #bdbdbd;
+}
+
+/* --bg-color: #fff;
+--text-color: #333;
+--grey-color: #efefef;
+--grey-color-2: #e4e4e4; */
+
 html {
-  background: #000;
-  color: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgb(20, 20, 23) 100%
+    var(--bg-color) 0%,
+    var(--grey-color) 100%
   );
 }
 
