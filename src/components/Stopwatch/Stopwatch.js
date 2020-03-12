@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Stopwatch.css";
 import Button from "../Button/Button";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
 class Stopwatch extends Component {
   state = {
@@ -251,6 +252,7 @@ class Stopwatch extends Component {
             by Nikola Antic{" "}
             <Button buttonClasses="GithubButton" svgIcon="github" />
           </a>
+          <ThemeSwitcher />
         </div>
         <div className="MainHolder">
           <div className="TimeHolder">
