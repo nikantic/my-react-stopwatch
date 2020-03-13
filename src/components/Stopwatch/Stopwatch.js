@@ -252,10 +252,12 @@ class Stopwatch extends Component {
             by Nikola Antic{" "}
             <Button buttonClasses="GithubButton" svgIcon="github" />
           </a>
-          <ThemeSwitcher />
         </div>
         <div className="MainHolder">
           <div className="TimeHolder">
+            <div className="ThemeSwitcherHolder">
+              <ThemeSwitcher />
+            </div>
             <div className="TimeSvgHolder">
               <svg width="300" height="300">
                 <circle cx="150" cy="150" r="120" />

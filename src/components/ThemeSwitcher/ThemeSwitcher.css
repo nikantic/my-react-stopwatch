@@ -1,4 +1,15 @@
-.ThemeSwitcher {
-  width: 20px;
-  height: 20px;
+.ThemeSwitcher,
+.ThemeSwitcher:hover {
+  background-color: transparent;
+}
+
+.ThemeSwitcher svg path {
+  fill: #fff;
+}
+
+.ThemeSwitcherHolder {
+  position: absolute;
+  left: -100%;
+  z-index: 123;
+  top: -19%;
 }

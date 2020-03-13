@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Button from "../Button/Button";
+import "./ThemeSwitcher.css";
 
 class ThemeSwitcher extends Component {
   state = {
@@ -27,16 +29,22 @@ class ThemeSwitcher extends Component {
       activeTheme: newActiveTheme
     }));
 
-    for (let key in this.state.newActiveTheme) {
+    for (let key in this.state[newActiveTheme]) {
       document.documentElement.style.setProperty(
         key,
-        this.state.newActiveTheme[key]
+        this.state[newActiveTheme][key]
       );
     }
   };
 
   render() {
-    return <div className="ThemeSwitcher" onClick={this.ChangeTheme} />;
+    return (
+      <Button
+        buttonClasses="ThemeSwitcher"
+        clicked={this.ChangeTheme}
+        svgIcon="daynight"
+      />
+    );
   }
 }
 
