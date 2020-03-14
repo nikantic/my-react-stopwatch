@@ -4,12 +4,21 @@
 }
 
 .ThemeSwitcher svg path {
-  fill: #fff;
+  fill: var(--grey-color-2);
 }
 
 .ThemeSwitcherHolder {
   position: absolute;
-  left: -100%;
+  right: -63%;
   z-index: 123;
-  top: -19%;
+  top: -40%;
+}
+
+/* Media Queries */
+
+@media (max-width: 600px) {
+  .ThemeSwitcherHolder {
+    right: -55%;
+    top: -28%;
+  }
 }
