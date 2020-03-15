@@ -142,6 +142,7 @@ class Stopwatch extends Component {
           // Start Stopwatch
           this.UpdateTime();
           this.UpdateSaveTime();
+          this.TimeSvgCircleRef.current.style.opacity = "1";
         } else {
           // Pause Stopwatch
           clearInterval(this.timeInterval);
@@ -161,6 +162,14 @@ class Stopwatch extends Component {
     this.reinitSmallCircle();
     this.TimeSvgCircle2Rotate = 0;
     this.TimeSvgCircleRef2.current.style.transform = "rotateZ(" + 0 + "deg)";
+    this.TimeSvgCircleRef.current.style.transition = "1s";
+    this.TimeSvgCircleRef2.current.style.transition = "1s";
+    setTimeout(() => {
+      this.TimeSvgCircleRef.current.style.transition = "";
+      this.TimeSvgCircleRef2.current.style.transition = "";
+      this.TimeSvgCircleRef.current.style.opacity = "0";
+      this.TimeSvgCircleRef2.current.style.opacity = "0";
+    }, 1000);
     this.setState(prevState => ({
       ...prevState,
       time: {
@@ -181,6 +190,7 @@ class Stopwatch extends Component {
 
   SaveResult = () => {
     clearInterval(this.saveTimeInterval);
+    this.TimeSvgCircleRef2.current.style.opacity = "1";
     this.TimeSvgCircleRef2.current.style.transform =
       "rotateZ(" + this.TimeSvgCircle2Rotate + "deg)";
     this.reinitCircleSVG2();
