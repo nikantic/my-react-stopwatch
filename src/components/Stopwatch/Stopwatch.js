@@ -22,6 +22,7 @@ class Stopwatch extends Component {
 
   constructor(props) {
     super(props);
+    this.timeIntervalValue = 1000 / 60;
     this.timeInterval = null;
     this.saveTimeInterval = null;
     this.TimeSvgCircleRef = React.createRef();
@@ -79,7 +80,7 @@ class Stopwatch extends Component {
           ...prevState,
           saveTime: newSaveTimeState
         }));
-      }, 1);
+      }, this.timeIntervalValue);
     }
   };
 
@@ -89,7 +90,7 @@ class Stopwatch extends Component {
 
       this.TimeSvgCircleDashOffset -= 0.207;
       this.TimeSvgCircleRef.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset;
-      this.TimeSvgCircle2Rotate += 0.098;
+      this.TimeSvgCircle2Rotate += 0.0983;
 
       if (this.TimeSvgCircleDashOffset < 0) {
         this.reinitCircleSVG();
@@ -97,7 +98,7 @@ class Stopwatch extends Component {
       if (this.TimeSvgCircleDashOffset2 < 0) {
         this.reinitCircleSVG2();
       }
-      if (this.TimeSvgCircle2Rotate > 358) {
+      if (this.TimeSvgCircle2Rotate > 359) {
         this.TimeSvgCircle2Rotate = 0;
       }
       if (this.state.isSaveRunning) {
@@ -108,9 +109,9 @@ class Stopwatch extends Component {
           "rotateZ(" + this.TimeSvgCircle2Rotate + "deg)";
       }
 
-      this.TimeSmallCircleRotate += 1;
+      this.TimeSmallCircleRotate += 5.9;
 
-      if (this.TimeSmallCircleRotate > 358) {
+      if (this.TimeSmallCircleRotate > 359) {
         this.TimeSmallCircleRotate = 0;
       }
       this.TimeSmallCircle.current.style.transform =
@@ -120,7 +121,7 @@ class Stopwatch extends Component {
         ...prevState,
         time: oldTimeState
       }));
-    }, 1);
+    }, this.timeIntervalValue);
   };
 
   FormatNumber = number => {
@@ -162,14 +163,14 @@ class Stopwatch extends Component {
     this.reinitSmallCircle();
     this.TimeSvgCircle2Rotate = 0;
     this.TimeSvgCircleRef2.current.style.transform = "rotateZ(" + 0 + "deg)";
-    this.TimeSvgCircleRef.current.style.transition = "1s";
-    this.TimeSvgCircleRef2.current.style.transition = "1s";
+    this.TimeSvgCircleRef.current.style.transition = ".5s";
+    this.TimeSvgCircleRef2.current.style.transition = ".5s";
     setTimeout(() => {
       this.TimeSvgCircleRef.current.style.transition = "";
       this.TimeSvgCircleRef2.current.style.transition = "";
       this.TimeSvgCircleRef.current.style.opacity = "0";
       this.TimeSvgCircleRef2.current.style.opacity = "0";
-    }, 1000);
+    }, 500);
     this.setState(prevState => ({
       ...prevState,
       time: {
@@ -255,7 +256,7 @@ class Stopwatch extends Component {
         <div className="TitleArea">
           <h1>React Stopwatch</h1>
           <a
-            href="https://nikantic.github.io/"
+            href="https://github.com/nikantic/my-react-stopwatch"
             target="_blank"
             rel="noopener noreferrer"
           >

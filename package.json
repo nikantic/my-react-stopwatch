@@ -1,7 +1,7 @@
 {
   "name": "react-stopwatch",
   "version": "1.0.0",
-  "description": "Simple React stopwatch app",
+  "description": "My React Stopwatch App",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

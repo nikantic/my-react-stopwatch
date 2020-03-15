@@ -1,8 +1,8 @@
 todo:
 
-- find better way to calc circle pos
+- refactor code a bit (separate title, save component)
 
 credits:
 
-- update readme
+- update readme, add pic
 - Icons => UI Interface pack by Freepik
