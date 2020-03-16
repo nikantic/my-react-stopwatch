@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import "./Stopwatch.css";
+import utils from "../../utils/utils";
 import Button from "../Button/Button";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+import TitleArea from "../TitleArea/TitleArea";
+import SavedResults from "../SavedResults/SavedResults";
+import "./Stopwatch.css";
 
 class Stopwatch extends Component {
   state = {
@@ -35,12 +38,12 @@ class Stopwatch extends Component {
   }
 
   reinitCircleSVG = () => {
-    this.TimeSvgCircleDashOffset = 756; // stroke dashoffset length
+    this.TimeSvgCircleDashOffset = 756;
     this.TimeSvgCircleRef.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset;
   };
 
   reinitCircleSVG2 = () => {
-    this.TimeSvgCircleDashOffset2 = 629; // stroke dashoffset 2 length
+    this.TimeSvgCircleDashOffset2 = 629;
     this.TimeSvgCircleRef2.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset2;
   };
 
@@ -50,32 +53,10 @@ class Stopwatch extends Component {
       "rotateZ(" + this.TimeSmallCircleRotate + "deg)";
   };
 
-  timeFunc = time => {
-    let oldTimeState = time;
-    // Miliseconds
-    if (oldTimeState.miliseconds > 59) {
-      oldTimeState.miliseconds = 0;
-      oldTimeState.seconds += 1;
-    } else {
-      oldTimeState.miliseconds += 1;
-    }
-    // Seconds
-    if (oldTimeState.seconds > 59) {
-      oldTimeState.seconds = 0;
-      oldTimeState.minutes += 1;
-    }
-    // Minutes
-    if (oldTimeState.minutes > 59) {
-      oldTimeState.minutes = 0;
-    }
-
-    return oldTimeState;
-  };
-
   UpdateSaveTime = () => {
     if (this.state.isRunning && this.state.isSaveRunning) {
       this.saveTimeInterval = setInterval(() => {
-        let newSaveTimeState = this.timeFunc(this.state.saveTime);
+        let newSaveTimeState = utils.calcTime(this.state.saveTime);
         this.setState(prevState => ({
           ...prevState,
           saveTime: newSaveTimeState
@@ -86,8 +67,9 @@ class Stopwatch extends Component {
 
   UpdateTime = () => {
     this.timeInterval = setInterval(() => {
-      let oldTimeState = this.timeFunc(this.state.time);
+      let oldTimeState = utils.calcTime(this.state.time);
 
+      // Update main circle position
       this.TimeSvgCircleDashOffset -= 0.207;
       this.TimeSvgCircleRef.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset;
       this.TimeSvgCircle2Rotate += 0.0983;
@@ -101,6 +83,8 @@ class Stopwatch extends Component {
       if (this.TimeSvgCircle2Rotate > 359) {
         this.TimeSvgCircle2Rotate = 0;
       }
+
+      // Update inner circle position
       if (this.state.isSaveRunning) {
         this.TimeSvgCircleDashOffset2 -= 0.172;
         this.TimeSvgCircleRef2.current.style.strokeDashoffset = this.TimeSvgCircleDashOffset2;
@@ -109,8 +93,8 @@ class Stopwatch extends Component {
           "rotateZ(" + this.TimeSvgCircle2Rotate + "deg)";
       }
 
+      // Update small circle position
       this.TimeSmallCircleRotate += 5.9;
-
       if (this.TimeSmallCircleRotate > 359) {
         this.TimeSmallCircleRotate = 0;
       }
@@ -122,14 +106,6 @@ class Stopwatch extends Component {
         time: oldTimeState
       }));
     }, this.timeIntervalValue);
-  };
-
-  FormatNumber = number => {
-    return number < 10 ? "0" + number : number;
-  };
-
-  TimeToMiliseconds = time => {
-    return time.minutes * 3600 + time.seconds * 60 + time.miliseconds;
   };
 
   StartStopwatch = () => {
@@ -155,8 +131,8 @@ class Stopwatch extends Component {
 
   ResetStopwatch = () => {
     clearInterval(this.timeInterval);
-    this.timeInterval = null;
     clearInterval(this.saveTimeInterval);
+    this.timeInterval = null;
     this.saveTimeInterval = null;
     this.reinitCircleSVG();
     this.reinitCircleSVG2();
@@ -165,12 +141,14 @@ class Stopwatch extends Component {
     this.TimeSvgCircleRef2.current.style.transform = "rotateZ(" + 0 + "deg)";
     this.TimeSvgCircleRef.current.style.transition = ".5s";
     this.TimeSvgCircleRef2.current.style.transition = ".5s";
+
     setTimeout(() => {
       this.TimeSvgCircleRef.current.style.transition = "";
       this.TimeSvgCircleRef2.current.style.transition = "";
       this.TimeSvgCircleRef.current.style.opacity = "0";
       this.TimeSvgCircleRef2.current.style.opacity = "0";
     }, 500);
+
     this.setState(prevState => ({
       ...prevState,
       time: {
@@ -196,9 +174,9 @@ class Stopwatch extends Component {
       "rotateZ(" + this.TimeSvgCircle2Rotate + "deg)";
     this.reinitCircleSVG2();
 
-    const saveResultMs = this.TimeToMiliseconds(this.state.saveTime) * 1000;
-    const endTimeFormated = this.FormatSavedResult(this.state.time);
-    let savedResultFormated = this.FormatSavedResult(this.state.saveTime);
+    const saveResultMs = utils.timeToMiliseconds(this.state.saveTime) * 1000;
+    const endTimeFormated = utils.formatSavedResult(this.state.time);
+    let savedResultFormated = utils.formatSavedResult(this.state.saveTime);
     let startTimeFormated;
 
     if (this.state.savedResults.length) {
@@ -207,7 +185,7 @@ class Stopwatch extends Component {
       ].endTimeFormated;
     } else {
       savedResultFormated = endTimeFormated;
-      startTimeFormated = this.FormatSavedResult({
+      startTimeFormated = utils.formatSavedResult({
         minutes: 0,
         seconds: 0,
         miliseconds: 0
@@ -237,33 +215,10 @@ class Stopwatch extends Component {
     );
   };
 
-  FormatSavedResult = savedResult => {
-    let newSave = "";
-    const keys = Object.keys(savedResult);
-    const lastKey = keys[keys.length - 1];
-    for (var k in savedResult) {
-      newSave += this.FormatNumber(savedResult[k]);
-      if (k !== lastKey) {
-        newSave += ":";
-      }
-    }
-    return newSave;
-  };
-
   render() {
     return (
       <div className="App">
-        <div className="TitleArea">
-          <h1>React Stopwatch</h1>
-          <a
-            href="https://github.com/nikantic/my-react-stopwatch"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            by Nikola Antic{" "}
-            <Button buttonClasses="GithubButton" svgIcon="github" />
-          </a>
-        </div>
+        <TitleArea />
         <div className="MainHolder">
           <div className="TimeHolder">
             <div className="ThemeSwitcherHolder">
@@ -284,23 +239,23 @@ class Stopwatch extends Component {
             </div>
             {this.state.isSaveRunning ? (
               <div className="SaveTimeHolder">
-                <div>{this.FormatNumber(this.state.saveTime.minutes)}</div>
+                <div>{utils.formatNumber(this.state.saveTime.minutes)}</div>
                 <span>:</span>
-                <div>{this.FormatNumber(this.state.saveTime.seconds)}</div>
+                <div>{utils.formatNumber(this.state.saveTime.seconds)}</div>
                 <span>:</span>
-                <div>{this.FormatNumber(this.state.saveTime.miliseconds)}</div>
+                <div>{utils.formatNumber(this.state.saveTime.miliseconds)}</div>
               </div>
             ) : null}
             <div className="TimeItem">
-              {this.FormatNumber(this.state.time.minutes)}
+              {utils.formatNumber(this.state.time.minutes)}
             </div>
             <span>:</span>
             <div className="TimeItem">
-              {this.FormatNumber(this.state.time.seconds)}
+              {utils.formatNumber(this.state.time.seconds)}
             </div>
             <span>:</span>
             <div className="TimeItem">
-              {this.FormatNumber(this.state.time.miliseconds)}
+              {utils.formatNumber(this.state.time.miliseconds)}
             </div>
             <div className="SmallClock">
               <span ref={this.TimeSmallCircle} />
@@ -340,29 +295,7 @@ class Stopwatch extends Component {
           </div>
         </div>
         {this.state.savedResults.length ? (
-          <div className="SavedResultsHolder">
-            <h2>Saved Results</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Position</th>
-                  <th>Start</th>
-                  <th>Finish</th>
-                  <th>Total Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.savedResults.map((item, i) => (
-                  <tr key={i}>
-                    <td>{this.FormatNumber(i + 1)}</td>
-                    <td>{item.startTimeFormated}</td>
-                    <td>{item.endTimeFormated}</td>
-                    <td>{item.totalMsFormated}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <SavedResults savedResults={this.state.savedResults} />
         ) : null}
       </div>
     );

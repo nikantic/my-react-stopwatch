@@ -7,10 +7,9 @@
   --grey-color-2: #bdbdbd;
 }
 
-/* --bg-color: #fff;
---text-color: #333;
---grey-color: #efefef;
---grey-color-2: #e4e4e4; */
+::-webkit-scrollbar {
+  width: 0px;
+}
 
 html {
   background: var(--bg-color);
@@ -32,6 +31,13 @@ body {
   text-align: center;
 }
 
-::-webkit-scrollbar {
-  width: 0px;
+@keyframes slide-from-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

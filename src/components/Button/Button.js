@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Button.css";
-import svgIcons from "../../svgIcons";
+import svgIcons from "../../utils/svgIcons";
 
 class Button extends Component {
   constructor(props) {

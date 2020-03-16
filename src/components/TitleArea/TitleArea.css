@@ -1,0 +1,29 @@
+.TitleArea {
+  margin-top: 50px;
+}
+
+.TitleArea h1 {
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+}
+
+.TitleArea a {
+  display: inline-block;
+  margin: 15px 0;
+  font-size: 13px;
+  color: inherit;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+/* Media Queries */
+
+@media (max-width: 600px) {
+  .TitleArea {
+    margin-top: 30px;
+  }
+
+  .TitleArea h1 {
+    font-size: 27px;
+  }
+}
