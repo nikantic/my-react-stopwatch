@@ -1,6 +1,6 @@
 # React Stopwatch
 
-This is a simple React Stopwatch App done in React. I made this app from scratch to practice and improve my React and ES6 skills and also learn something new. Deployed on Zeit.
+This is a simple Stopwatch App done in React. I made this app from scratch to practice and improve my React and ES6 skills and also learn something new. Deployed on Zeit.
 
 It features:
 
@@ -8,7 +8,7 @@ It features:
 - Saved Results component to display results
 - Button component
 - Day / Night mode with CSS variables
-- Cool design and UX done with SVGs
+- Cool design and UX with SVGs
 
 ## Links
 
